@@ -12,7 +12,7 @@ export const actions = {
 		console.log(process.env['MG_USER'])
 
 		const transport = nodemailer.createTransport({
-			host: 'smtp.eu.mailgun.org',
+			host: process.env['MG_HOST'],
 			port: 587,
 			auth: {
 				user: process.env['MG_USER'],
