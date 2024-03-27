@@ -9,7 +9,6 @@ export const actions = {
 		const email = data.get('email');
 		const message = data.get('message');
 
-		console.log(process.env['MG_USER'])
 
 		const transport = nodemailer.createTransport({
 			host: process.env['MG_HOST'],
@@ -29,14 +28,19 @@ export const actions = {
 						   ${message}`
 		};
 
+
 		// eslint-disable-next-line no-unused-vars
-		const info = transport.sendMail(mailOptions, (error, info) => {
+		const info = transport.sendMail(mailOptions, async (error, info) => {
 			if (error) {
-				return console.log(error);
+
+
+				return console.log(error)
 			}
 			console.log("Message sent: %s", info.messageId);
+
+
 		});
 
-		return { success: true };
+		return { success: true, info: info };
 	}
 };
