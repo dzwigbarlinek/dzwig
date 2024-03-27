@@ -11,7 +11,7 @@ export async function POST({ request }) {
 
     const mailOptions = {
         from: email,
-        to: "danielborowski05@gmail.com", // the user email
+        to: "stalmaks@op.pl", // the user email
         subject: 'Formularz',
         html: `<h4>Formularz kontaktowy Dźwig Barlinek</h4>
                        ${message}`
