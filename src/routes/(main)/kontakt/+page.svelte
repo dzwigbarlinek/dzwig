@@ -1,8 +1,20 @@
 <script>
-	/** @type {import('./$types').ActionData} */
-	export let form;
+	let email = '';
+	let message = '';
 
-	console.log(form);
+	const sendMail = async () => {
+		const request = await fetch('/kontakt/test', {
+			method: 'POST',
+			body: JSON.stringify({ email, message }),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+
+		const response = await request.json();
+
+		console.log(response);
+	};
 </script>
 
 <div class="sep" />
@@ -34,7 +46,13 @@
 		<div class="card">
 			<div class="card-content">
 				<form method="POST" action="" class="formularz">
-					<input class="input is-medium" type="email" name="email" placeholder="Adres Email" />
+					<input
+						class="input is-medium"
+						type="email"
+						name="email"
+						placeholder="Adres Email"
+						bind:value={email}
+					/>
 
 					<textarea
 						class="textarea"
@@ -44,6 +62,7 @@
 						id="message"
 						cols="30"
 						placeholder="Wiadomość"
+						bind:value={message}
 					/>
 					<input
 						style="margin-top:1rem;"
@@ -51,10 +70,11 @@
 						type="submit"
 						name="submit"
 						value="Wyślij"
+						on:click|preventDefault={sendMail}
 					/>
-					{#if form?.success}
+					<!-- {#if form?.success}
 						<p style="color: hsl(141, 71%, 48%); font-size: 2rem;">Wiadomość wysłana!</p>
-					{/if}
+					{/if} -->
 				</form>
 			</div>
 		</div>
