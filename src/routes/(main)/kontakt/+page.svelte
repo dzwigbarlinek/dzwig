@@ -1,6 +1,7 @@
 <script>
 	let email = '';
 	let message = '';
+	let sent = false;
 
 	const sendMail = async () => {
 		const request = await fetch('/kontakt/test', {
@@ -13,7 +14,11 @@
 
 		const response = await request.json();
 
-		console.log(response);
+		if (Object.hasOwn(response, 'response')) {
+			sent = true;
+			email = '';
+			message = '';
+		}
 	};
 </script>
 
@@ -72,6 +77,10 @@
 						value="Wyślij"
 						on:click|preventDefault={sendMail}
 					/>
+
+					{#if sent}
+						<p>Wiadomość wysłana!</p>
+					{/if}
 					<!-- {#if form?.success}
 						<p style="color: hsl(141, 71%, 48%); font-size: 2rem;">Wiadomość wysłana!</p>
 					{/if} -->
